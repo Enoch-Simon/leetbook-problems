@@ -3,6 +3,9 @@ package day01_栈与队列_简单;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* 用两个栈实现队列，优化了下自己的拙解，但还是不够好，因为栈A和栈B完全可以使得队列首尾分离，栈A只负责入队，栈B只负责出队，没必要队列要完完整整地在一个栈中
+* */
 class CStack {
     private List<Integer> stackList;
 
