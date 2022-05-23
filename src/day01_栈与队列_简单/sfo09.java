@@ -3,53 +3,17 @@ package day01_栈与队列_简单;
 import java.util.ArrayList;
 import java.util.List;
 
-class CStack {
-    private List<Integer> stackList;
-
-    public CStack() {
-        this.stackList = new ArrayList<>();
-    }
-
-    public void push(int value) {
-        this.stackList.add(value);
-    }
-
-    public int pop() {
-        if (stackList.size() == 0) {
-            return -1;
-        }
-        return stackList.remove(stackList.size() - 1);
-    }
-
-    public int size() {
-        return stackList.size();
-    }
-}
-
-class CQueue {
+class CQueue2 {
     private CStack stack1;
     private CStack stack2;
 
-    public CQueue() {
+    public CQueue2() {
         this.stack1 = new CStack();
         this.stack2 = new CStack();
     }
 
     public void appendTail(int value) {
-        if (stack1.size() == 0) {
-            stack1.push(value);
-            return;
-        }
-
-        int size1 = stack1.size();
-        for (int i = 0; i < size1; i++) {
-            stack2.push(stack1.pop());
-        }
         stack1.push(value);
-        int size2 = stack2.size();
-        for (int i = 0; i < size2; i++) {
-            stack1.push(stack2.pop());
-        }
     }
 
     public int deleteHead() {
@@ -57,11 +21,16 @@ class CQueue {
             return -1;
         }
 
-        if (stack1.size() == 0) {
-            return stack2.pop();
-        } else {
-            return stack1.pop();
+        int size1 = stack1.size();
+        for (int i = 0; i < size1; i++) {
+            stack2.push(stack1.pop());
         }
+        int result = stack2.pop();
+        int size2 = stack2.size();
+        for (int i = 0; i < size2; i++) {
+            stack1.push(stack2.pop());
+        }
+        return result;
     }
 }
 
@@ -72,36 +41,36 @@ class CQueue {
  * int param_2 = obj.deleteHead();
  */
 
-public class of09 {
+public class sfo09 {
     public static void main(String[] args) {
         /*
         * ["CQueue","appendTail","deleteHead","deleteHead"]
           [[],[3],[],[]]
         * */
-        CQueue cQueue = new CQueue();
-        cQueue.appendTail(3);
-        System.out.println(cQueue.deleteHead());
-        System.out.println(cQueue.deleteHead());
+//        CQueue cQueue = new CQueue();
+//        cQueue.appendTail(3);
+//        System.out.println(cQueue.deleteHead());
+//        System.out.println(cQueue.deleteHead());
         
         
         /*
         * ["CQueue","deleteHead","appendTail","appendTail","deleteHead","deleteHead"]
           [[],[],[5],[2],[],[]]
         * */
-        System.out.println("-----------------Second---------------------");
-        CQueue cQueue2 = new CQueue();
-        System.out.println(cQueue2.deleteHead());
-        cQueue2.appendTail(5);
-        cQueue2.appendTail(2);
-        System.out.println(cQueue2.deleteHead());
-        System.out.println(cQueue2.deleteHead());
+//        System.out.println("-----------------Second---------------------");
+//        CQueue2 cQueue2 = new CQueue2();
+//        System.out.println(cQueue2.deleteHead());
+//        cQueue2.appendTail(5);
+//        cQueue2.appendTail(2);
+//        System.out.println(cQueue2.deleteHead());
+//        System.out.println(cQueue2.deleteHead());
         
         /*
         * ["CQueue","deleteHead","appendTail","deleteHead","appendTail","appendTail","deleteHead","deleteHead","deleteHead","appendTail","deleteHead","appendTail","appendTail","appendTail","appendTail","appendTail","appendTail","deleteHead","deleteHead","deleteHead","deleteHead"]
           [[],[],[12],[],[10],[9],[],[],[],[20],[],[1],[8],[20],[1],[11],[2],[],[],[],[]]
         * */
         System.out.println("-----------------Third---------------------");
-        CQueue cQueue3 = new CQueue();
+        CQueue2 cQueue3 = new CQueue2();
         System.out.println(cQueue3.deleteHead());
         cQueue3.appendTail(12);
         System.out.println(cQueue3.deleteHead());
